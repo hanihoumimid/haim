@@ -202,17 +202,25 @@
                         <form action="https://formspree.io/f/VOTRE_ID_ICI" method="POST" class="space-y-4">
                             <input type="text" name="nom" required aria-label="Votre nom" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Votre nom complet">
                             <input type="tel" name="telephone" required aria-label="Votre téléphone" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Votre numéro de téléphone">
-                            <select name="type" required aria-label="Nature du problème" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all">
-                                <option value="" disabled selected>Nature du problème...</option>
-                                <option>Urgence Électricité</option>
-                                <option>Urgence Plomberie</option>
-                                <option>Projet d'installation</option>
-                            </select>
-                            <button type="submit" class="w-full py-4 bg-brand text-white font-bold rounded-lg hover:bg-brand-dark transition-colors mt-2 text-lg">
-                                Être rappelé gratuitement
-                            </button>
-                            <p class="text-center text-xs text-slate-400 mt-2"><i class="fas fa-lock mr-1"></i> Vos données sont sécurisées</p>
-                        </form>
+<select name="type" required aria-label="Nature du problème" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all">
+                                <option value="" disabled selected>Nature du problème...</option>
+                                <option>Urgence Électricité</option>
+                                <option>Urgence Plomberie</option>
+                                <option>Projet d'installation</option>
+                            </select>
+
+                            <div class="flex items-start gap-2 mt-4 mb-2">
+                                <input type="checkbox" id="consent_hero" name="consentement" required class="mt-0.5 w-4 h-4 text-brand bg-white border-slate-300 rounded focus:ring-brand cursor-pointer shrink-0">
+                                <label for="consent_hero" class="text-[11px] text-slate-500 cursor-pointer leading-tight">
+                                    J'accepte que mes données soient traitées pour ma demande. <button type="button" onclick="openModal('modal-confid')" class="text-brand hover:underline">Politique de confidentialité</button>.
+                                </label>
+                            </div>
+
+<button type="submit" class="w-full bg-brand text-white font-bold rounded-lg hover:bg-brand-dark transition-colors py-3 text-center text-lg">
+    Être rappelé gratuitement
+</button>
+                            <p class="text-center text-xs text-slate-400 mt-2"><i class="fas fa-lock mr-1"></i> Vos données sont sécurisées</p>
+                        </form>
                     </div>
                 </div>
 
@@ -455,16 +463,22 @@
                                 <option>Autre prestation</option>
                             </select>
                         </div>
+                    <div>
+                            <label for="message" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Détails de la demande</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Expliquez brièvement votre problème ou projet..."></textarea>
+                        </div>
 
-                        <div>
-                            <label for="message" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Détails de la demande</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Expliquez brièvement votre problème ou projet..."></textarea>
+                        <div class="flex items-start gap-3">
+                            <input type="checkbox" id="consent_contact" name="consentement" required class="mt-1 w-4 h-4 text-brand bg-white border-slate-300 rounded focus:ring-brand cursor-pointer shrink-0">
+                            <label for="consent_contact" class="text-sm text-slate-600 cursor-pointer leading-snug">
+                                En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées pour traiter ma demande. <button type="button" onclick="openModal('modal-confid')" class="text-brand font-medium hover:underline">Voir notre politique</button>.
+                            </label>
                         </div>
 
-                        <button type="submit" class="w-full py-4 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark transition-colors flex justify-center items-center gap-2 text-lg group">
-                            Envoyer la demande <i class="fas fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-                        </button>
-                    </form>
+                        <button type="submit" class="w-full py-4 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark transition-colors flex justify-center items-center gap-2 text-lg group">
+                            Envoyer la demande <i class="fas fa-paper-plane group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
