@@ -14,10 +14,6 @@
     <meta property="og:description" content="Dépannage en urgence ou rénovation. Électricité et plomberie à Marseille (13008). Appelez pour un devis gratuit !">
     <meta property="og:url" content="https://votre-domaine.fr/">
     <meta property="og:image" content="https://votre-domaine.fr/haim.png">
-    <meta property="business:contact_data:street_address" content="1 traverse Antignane">
-    <meta property="business:contact_data:locality" content="Marseille">
-    <meta property="business:contact_data:postal_code" content="13008">
-    <meta property="business:contact_data:country_name" content="France">
 
     <script type="application/ld+json">
     {
@@ -81,21 +77,17 @@
     <style>
         .glass-nav { background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(8px); border-bottom: 1px solid #f1f5f9; }
         
-        /* Animations de base */
+        /* Animations de base - Uniquement vertical pour éviter tout scroll horizontal indésirable */
         .reveal { opacity: 0; transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translate(0, 0); }
-        
-        /* Directions d'animation */
         .reveal-up { transform: translateY(30px); }
-        .reveal-left { transform: translateX(-30px); }
-        .reveal-right { transform: translateX(30px); }
         
         /* Délais */
         .delay-100 { transition-delay: 0.1s; } 
         .delay-200 { transition-delay: 0.2s; } 
         .delay-300 { transition-delay: 0.3s; }
         .delay-400 { transition-delay: 0.4s; }
-
+        
         details > summary { list-style: none; } 
         details > summary::-webkit-details-marker { display: none; }
 
@@ -104,7 +96,7 @@
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="text-slate-800 antialiased bg-slate-50 selection:bg-action selection:text-white overflow-x-hidden max-w-full">
+<body class="text-slate-800 antialiased bg-slate-50 selection:bg-action selection:text-white">
 
     <div id="availability-bar" class="bg-brand-dark text-white text-sm py-2 font-medium w-full transition-colors duration-500">
         <div class="container mx-auto px-4 lg:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-2">
@@ -171,7 +163,7 @@
         <div class="container mx-auto px-4 lg:px-8 py-16 md:py-24 relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-12">
                 
-                <div class="w-full lg:w-3/5 text-center lg:text-left reveal reveal-left">
+                <div class="w-full lg:w-3/5 text-center lg:text-left reveal reveal-up">
                     <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm">
                         <i class="fas fa-bolt text-yellow-400"></i>
                         <span class="text-xs md:text-sm font-bold uppercase tracking-wide">Artisan Qualifié • Marseille 13008</span>
@@ -200,7 +192,7 @@
                     </div>
                 </div>
 
-                <div class="w-full lg:w-2/5 max-w-md mx-auto reveal reveal-right delay-200 hidden md:block">
+                <div class="w-full lg:w-2/5 max-w-md mx-auto reveal reveal-up delay-200 hidden md:block">
                     <div class="bg-white rounded-2xl p-6 md:p-8 shadow-2xl text-slate-800">
                         <h2 class="text-2xl font-bold mb-2">Besoin d'une intervention ?</h2>
                         <p class="text-sm text-slate-500 mb-6">Remplissez ce formulaire court, nous vous rappelons dans les plus brefs délais.</p>
@@ -446,7 +438,7 @@
     <div class="container mx-auto px-4 lg:px-8">
         <div class="flex flex-col lg:flex-row items-start gap-12">
             
-            <div class="lg:w-1/3 reveal reveal-left text-center lg:text-left sticky top-28 z-0">
+            <div class="lg:w-1/3 reveal reveal-up text-center lg:text-left sticky top-28 z-0">
                 <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Avis de nos clients.</h2>
                 <p class="text-slate-600 mb-6">Avec une excellente moyenne et de nombreuses recommandations, la satisfaction de nos clients est notre meilleure publicité.</p>
                 <div class="inline-flex flex-col items-center lg:items-start bg-white p-6 rounded-2xl border border-slate-100 w-full sm:w-auto hover:shadow-md transition-shadow shadow-sm">
@@ -458,7 +450,7 @@
                 </div>
             </div>
             
-            <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6 reveal reveal-right delay-100 relative z-10 bg-slate-50 lg:bg-transparent py-4 lg:py-0">
+            <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6 reveal reveal-up delay-100 relative z-10 bg-slate-50 lg:bg-transparent py-4 lg:py-0">
                 
                 <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow shadow-sm">
                     <div class="flex justify-between items-start mb-4">
@@ -624,7 +616,7 @@
         </div>
     </footer>
 
-    <div class="sm:hidden fixed bottom-6 right-6 z-50">
+    <div class="sm:hidden fixed bottom-6 right-6 z-[60]">
         <a href="tel:0762505480" class="w-16 h-16 bg-action text-white rounded-full shadow-glow flex items-center justify-center text-2xl animate-bounce border-2 border-white/20" aria-label="Appeler d'urgence">
             <i class="fas fa-phone-alt"></i>
         </a>
@@ -661,8 +653,10 @@
         
         if (day === 6) { 
             // C'est samedi : Mode Fermé
-            statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-slate-400 mr-2"></span> Fermé aujourd\'hui (Samedi)';
-            statusBadge.className = 'flex items-center bg-slate-100/20 text-slate-300 px-2 py-0.5 rounded text-xs font-bold';
+            if(statusBadge) {
+                statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-slate-400 mr-2"></span> Fermé aujourd\'hui (Samedi)';
+                statusBadge.className = 'flex items-center bg-slate-100/20 text-slate-300 px-2 py-0.5 rounded text-xs font-bold';
+            }
             
             const formWarning = document.getElementById('urgency-warning');
             if (formWarning) {
@@ -670,13 +664,15 @@
             }
         } else {
             // Ouvert (Les autres jours)
-            statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-success mr-2"></span> Disponible 24h/24';
-            statusBadge.className = 'flex items-center bg-success/20 text-success px-2 py-0.5 rounded text-xs font-bold animate-pulse';
+            if(statusBadge) {
+                statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-success mr-2"></span> Disponible 24h/24';
+                statusBadge.className = 'flex items-center bg-success/20 text-success px-2 py-0.5 rounded text-xs font-bold animate-pulse';
+            }
         }
     }
     checkAvailability();
 
-    // --- Carrousel Réalisations (Infini) ---
+    // --- Carrousel Réalisations (Infini JS) ---
     const track = document.getElementById('carousel-track');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -685,15 +681,13 @@
         const originals = Array.from(track.children);
         const n = originals.length;
 
-        // Préfixe : clones en sens inverse (pour défiler vers la gauche depuis le début)
+        // Préfixe : clones en sens inverse
         [...originals].reverse().forEach(card => track.prepend(card.cloneNode(true)));
-        // Suffixe : clones normaux (pour défiler vers la droite depuis la fin)
+        // Suffixe : clones normaux
         originals.forEach(card => track.appendChild(card.cloneNode(true)));
 
-        // Distance entre le début de deux cartes consécutives
         const step = () => track.children[1].offsetLeft - track.children[0].offsetLeft;
 
-        // Saut silencieux (sans animation) vers une position donnée
         const silentJump = (pos) => {
             track.style.scrollBehavior = 'auto';
             track.scrollLeft = pos;
@@ -702,7 +696,6 @@
             }));
         };
 
-        // Initialisation : positionner sur la première carte réelle (index n)
         const init = () => silentJump(track.children[n].offsetLeft);
         if (document.readyState === 'complete') { init(); }
         else { window.addEventListener('load', init, { once: true }); }
@@ -715,7 +708,6 @@
             track.scrollBy({ left: step(), behavior: 'smooth' });
         });
 
-        // Après chaque fin de défilement, si on est dans une zone clone → saut vers la zone réelle
         let loopTimer;
         track.addEventListener('scroll', () => {
             clearTimeout(loopTimer);
@@ -750,8 +742,8 @@
         }
     }
 
-    btn.addEventListener('click', toggleMenu);
-    closeBtn.addEventListener('click', toggleMenu);
+    if(btn) btn.addEventListener('click', toggleMenu);
+    if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
     links.forEach(link => { link.addEventListener('click', toggleMenu); });
 
     // --- Gestion des Modales ---
@@ -762,7 +754,6 @@
         container.classList.remove('hidden'); 
         container.classList.add('flex');
         
-        // Petit délai pour l'animation de scale
         setTimeout(() => {
             modalBox.classList.remove('scale-95');
             modalBox.classList.add('scale-100');
@@ -796,14 +787,14 @@
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15 // Se déclenche quand 15% de l'élément est visible
+        threshold: 0.15
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                observer.unobserve(entry.target); // Ne joue l'animation qu'une fois
+                observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
