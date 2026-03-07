@@ -98,6 +98,10 @@
 
         details > summary { list-style: none; } 
         details > summary::-webkit-details-marker { display: none; }
+
+        /* Masquer la scrollbar du carrousel */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="text-slate-800 antialiased bg-slate-50 selection:bg-action selection:text-white overflow-x-hidden max-w-full">
@@ -124,6 +128,7 @@
 
         <nav class="hidden lg:flex items-center gap-8 font-semibold text-slate-700">
             <a href="#services" class="hover:text-action transition-colors">Nos Prestations</a>
+            <a href="#realisations" class="hover:text-action transition-colors">Réalisations</a>
             <a href="#avis" class="hover:text-action transition-colors">Avis Clients</a>
             <a href="#contact" class="hover:text-action transition-colors">Contact</a>
         </nav>
@@ -145,6 +150,7 @@
         </button>
         <nav class="flex flex-col space-y-6 text-xl font-bold text-slate-800">
             <a href="#services" class="mobile-link border-b border-slate-100 pb-4">Nos Prestations</a>
+            <a href="#realisations" class="mobile-link border-b border-slate-100 pb-4">Nos Réalisations</a>
             <a href="#avis" class="mobile-link border-b border-slate-100 pb-4">Avis Clients</a>
             <a href="#contact" class="mobile-link border-b border-slate-100 pb-4">Devis & Contact</a>
         </nav>
@@ -202,7 +208,7 @@
                         <form action="https://formspree.io/f/VOTRE_ID_ICI" method="POST" class="space-y-4">
                             <input type="text" name="nom" required aria-label="Votre nom" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Votre nom complet">
                             <input type="tel" name="telephone" required aria-label="Votre téléphone" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Votre numéro de téléphone">
-<select name="type" required aria-label="Nature du problème" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all">
+                            <select name="type" required aria-label="Nature du problème" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all">
                                 <option value="" disabled selected>Nature du problème...</option>
                                 <option>Urgence Électricité</option>
                                 <option>Urgence Plomberie</option>
@@ -216,9 +222,9 @@
                                 </label>
                             </div>
 
-<button type="submit" class="w-full bg-brand text-white font-bold rounded-lg hover:bg-brand-dark transition-colors py-3 text-center text-lg">
-    Être rappelé gratuitement
-</button>
+                            <button type="submit" class="w-full bg-brand text-white font-bold rounded-lg hover:bg-brand-dark transition-colors py-3 text-center text-lg">
+                                Être rappelé gratuitement
+                            </button>
                             <p class="text-center text-xs text-slate-400 mt-2"><i class="fas fa-lock mr-1"></i> Vos données sont sécurisées</p>
                         </form>
                     </div>
@@ -255,7 +261,7 @@
         </div>
     </div>
 
-    <section id="services" class="py-20 bg-slate-50 w-full">
+    <section id="services" class="py-20 bg-slate-50 w-full border-b border-slate-200">
         <div class="container mx-auto px-4 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16 reveal reveal-up">
                 <span class="text-brand font-bold uppercase tracking-widest text-sm mb-2 block">Artisan Plombier & Électricien</span>
@@ -366,14 +372,84 @@
         </div>
     </section>
 
-<section id="avis" class="py-20 bg-white border-t border-slate-100 w-full relative">
+    <section id="realisations" class="py-20 bg-white w-full overflow-hidden">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal reveal-up">
+                <span class="text-brand font-bold uppercase tracking-widest text-sm mb-2 block">Nos Réalisations</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Un aperçu de nos interventions.</h2>
+                <p class="text-slate-600">Découvrez la qualité de nos chantiers en plomberie et électricité, réalisés avec soin à Marseille et ses alentours.</p>
+            </div>
+
+            <div class="relative max-w-6xl mx-auto reveal reveal-up delay-100 group">
+                
+                <button id="prevBtn" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-10 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-brand hover:text-action hover:scale-110 transition-all opacity-90 hover:opacity-100" aria-label="Précédent">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="nextBtn" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-10 w-10 h-10 md:w-12 md:h-12 bg-white rounded-full shadow-lg border border-slate-100 flex items-center justify-center text-brand hover:text-action hover:scale-110 transition-all opacity-90 hover:opacity-100" aria-label="Suivant">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
+                <div id="carousel-track" class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-6 pt-2 px-2 hide-scrollbar scroll-smooth">
+                    
+                    <div class="snap-center shrink-0 w-full sm:w-[calc(100%-1rem)] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] flex flex-col bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="sdb.jpg" alt="Rénovation complète de salle de bain" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 mb-2">Rénovation de Salle de Bain</h3>
+                            <p class="text-sm text-slate-600">Installation de cabine de douche, meuble vasque et plomberie complète avec finitions modernes.</p>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-full sm:w-[calc(100%-1rem)] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] flex flex-col bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="elec.jpg" alt="Remplacement tableau électrique suite à un incendie" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 mb-2">Mise aux Normes Électriques</h3>
+                            <p class="text-sm text-slate-600">Remplacement d'urgence et sécurisation d'un tableau électrique vétuste ayant subi un départ de feu.</p>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-full sm:w-[calc(100%-1rem)] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] flex flex-col bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="ballon.jpg" alt="Installation Chauffe-eau Thermor" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 mb-2">Installation de Chauffe-eau</h3>
+                            <p class="text-sm text-slate-600">Mise en place d'un ballon d'eau chaude (cumulus) Thermor performant et raccordement au réseau.</p>
+                        </div>
+                    </div>
+
+                    <div class="snap-center shrink-0 w-full sm:w-[calc(100%-1rem)] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1rem)] flex flex-col bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100 hover:shadow-xl transition-shadow">
+                        <div class="h-64 overflow-hidden relative">
+                            <img src="borne.jpg" alt="Installation borne de recharge véhicule électrique" class="w-full h-full object-cover hover:scale-110 transition-transform duration-700">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-bold text-slate-900 mb-2">Borne de Recharge Auto</h3>
+                            <p class="text-sm text-slate-600">Création d'une ligne dédiée et installation sécurisée d'une borne de recharge pour véhicule électrique en garage.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="text-center mt-10 reveal reveal-up delay-200">
+                <a href="#contact" class="inline-flex items-center text-action font-bold hover:text-action-dark transition-colors">
+                    Vous avez un projet similaire ? Discutons-en <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<section id="avis" class="py-20 bg-slate-50 border-t border-slate-100 w-full relative">
     <div class="container mx-auto px-4 lg:px-8">
         <div class="flex flex-col lg:flex-row items-start gap-12">
             
             <div class="lg:w-1/3 reveal reveal-left text-center lg:text-left sticky top-28 z-0">
                 <h2 class="text-3xl font-extrabold text-slate-900 mb-4">Avis de nos clients.</h2>
                 <p class="text-slate-600 mb-6">Avec une excellente moyenne et de nombreuses recommandations, la satisfaction de nos clients est notre meilleure publicité.</p>
-                <div class="inline-flex flex-col items-center lg:items-start bg-slate-50 p-6 rounded-2xl border border-slate-100 w-full sm:w-auto hover:shadow-md transition-shadow">
+                <div class="inline-flex flex-col items-center lg:items-start bg-white p-6 rounded-2xl border border-slate-100 w-full sm:w-auto hover:shadow-md transition-shadow shadow-sm">
                     <div class="flex text-yellow-400 text-2xl mb-2">
                         <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-300"></i>
                     </div>
@@ -382,37 +458,37 @@
                 </div>
             </div>
             
-            <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6 reveal reveal-right delay-100 relative z-10 bg-white lg:bg-transparent py-4 lg:py-0">
+            <div class="lg:w-2/3 grid sm:grid-cols-2 gap-6 reveal reveal-right delay-100 relative z-10 bg-slate-50 lg:bg-transparent py-4 lg:py-0">
                 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow shadow-sm">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h4 class="font-bold text-slate-900">MICHAEL ABECASSIS</h4>
                             <span class="text-xs text-slate-500">Local Guide • Janvier 2026</span>
                         </div>
-                        <div class="flex text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <div class="flex text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-300"></i></div>
                     </div>
                     <p class="text-sm text-slate-600 italic">"Très professionnel, travail de qualité"</p>
                 </div>
 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow shadow-sm">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h4 class="font-bold text-slate-900">Babeth Attia Tartour</h4>
                             <span class="text-xs text-slate-500">Janvier 2026</span>
                         </div>
-                        <div class="flex text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <div class="flex text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-300"></i></div>
                     </div>
                     <p class="text-sm text-slate-600 italic">"Intervention rapide. Travail soigné. Tarif très correct."</p>
                 </div>
 
-                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow sm:col-span-2">
+                <div class="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-md transition-shadow shadow-sm sm:col-span-2">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <h4 class="font-bold text-slate-900">Fanny Ziane</h4>
                             <span class="text-xs text-slate-500">Novembre 2022</span>
                         </div>
-                        <div class="flex text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <div class="flex text-yellow-400 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-300"></i></div>
                     </div>
                     <div class="text-sm text-slate-600 italic space-y-3">
                         <p>"Je suis ravie de mon expérience avec l'entreprise Haim Lumière. J'ai sollicité l'entreprise pour plusieurs travaux et J'ai été entièrement satisfaite.</p>
@@ -496,9 +572,9 @@
                             </label>
                         </div>
 
-<button type="submit" class="w-full py-4 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark transition-colors text-center text-lg group">
-    Envoyer la demande <i class="fas fa-paper-plane inline-block ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
-</button>
+                        <button type="submit" class="w-full py-4 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark transition-colors text-center text-lg group">
+                            Envoyer la demande <i class="fas fa-paper-plane inline-block ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -542,8 +618,8 @@
                 </div>
             </div>
             
-            <div class="border-t border-white/10 pt-6 flex justify-center items-center text-xs">
-                <div class="text-center">© <span id="current-year"></span> Haim Lumière. Tous droits réservés.</div>
+            <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+                <div>© <span id="current-year"></span> Haim Lumière. Tous droits réservés.</div>
             </div>
         </div>
     </footer>
@@ -599,6 +675,27 @@
         }
     }
     checkAvailability();
+
+    // --- Gestion du Carrousel Réalisations ---
+    const track = document.getElementById('carousel-track');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if(track && prevBtn && nextBtn) {
+        // Calcule la largeur de défilement en fonction d'une carte
+        const getScrollAmount = () => {
+            const card = track.querySelector('div');
+            return card ? card.offsetWidth + 24 : 300; // 24 = gap-6 de Tailwind
+        };
+
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
+    }
 
     // --- Gestion du Menu Mobile ---
     const btn = document.getElementById('mobile-menu-btn');
