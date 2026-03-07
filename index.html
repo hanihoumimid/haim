@@ -676,25 +676,60 @@
     }
     checkAvailability();
 
-    // --- Gestion du Carrousel Réalisations ---
+    // --- Carrousel Réalisations (Infini) ---
     const track = document.getElementById('carousel-track');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
-    if(track && prevBtn && nextBtn) {
-        // Calcule la largeur de défilement en fonction d'une carte
-        const getScrollAmount = () => {
-            const card = track.querySelector('div');
-            return card ? card.offsetWidth + 24 : 300; // 24 = gap-6 de Tailwind
+    if (track && prevBtn && nextBtn) {
+        const originals = Array.from(track.children);
+        const n = originals.length;
+
+        // Préfixe : clones en sens inverse (pour défiler vers la gauche depuis le début)
+        [...originals].reverse().forEach(card => track.prepend(card.cloneNode(true)));
+        // Suffixe : clones normaux (pour défiler vers la droite depuis la fin)
+        originals.forEach(card => track.appendChild(card.cloneNode(true)));
+
+        // Distance entre le début de deux cartes consécutives
+        const step = () => track.children[1].offsetLeft - track.children[0].offsetLeft;
+
+        // Saut silencieux (sans animation) vers une position donnée
+        const silentJump = (pos) => {
+            track.style.scrollBehavior = 'auto';
+            track.scrollLeft = pos;
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                track.style.scrollBehavior = '';
+            }));
         };
 
+        // Initialisation : positionner sur la première carte réelle (index n)
+        const init = () => silentJump(track.children[n].offsetLeft);
+        if (document.readyState === 'complete') { init(); }
+        else { window.addEventListener('load', init, { once: true }); }
+        setTimeout(init, 100);
+
         prevBtn.addEventListener('click', () => {
-            track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+            track.scrollBy({ left: -step(), behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: step(), behavior: 'smooth' });
         });
 
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-        });
+        // Après chaque fin de défilement, si on est dans une zone clone → saut vers la zone réelle
+        let loopTimer;
+        track.addEventListener('scroll', () => {
+            clearTimeout(loopTimer);
+            loopTimer = setTimeout(() => {
+                const s = step();
+                const rightCloneStart = track.children[n * 2].offsetLeft;
+                const realStart      = track.children[n].offsetLeft;
+                if (track.scrollLeft >= rightCloneStart) {
+                    silentJump(track.scrollLeft - n * s);
+                } else if (track.scrollLeft < realStart) {
+                    silentJump(track.scrollLeft + n * s);
+                }
+            }, 220);
+        }, { passive: true });
     }
 
     // --- Gestion du Menu Mobile ---
