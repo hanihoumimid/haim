@@ -102,10 +102,10 @@
 </head>
 <body class="text-slate-800 antialiased bg-slate-50 selection:bg-action selection:text-white overflow-x-hidden max-w-full">
 
-    <div class="bg-brand-dark text-white text-sm py-2 font-medium w-full">
+    <div id="availability-bar" class="bg-brand-dark text-white text-sm py-2 font-medium w-full transition-colors duration-500">
         <div class="container mx-auto px-4 lg:px-8 flex flex-wrap justify-center sm:justify-between items-center gap-2">
             <div class="flex items-center gap-3">
-                <span class="flex items-center bg-success/20 text-success px-2 py-0.5 rounded text-xs font-bold animate-pulse">
+                <span id="status-badge" class="flex items-center bg-success/20 text-success px-2 py-0.5 rounded text-xs font-bold animate-pulse">
                     <span class="w-2 h-2 rounded-full bg-success mr-2"></span> Disponible 24h/24
                 </span>
                 <span class="hidden md:inline text-slate-300"><i class="fas fa-map-marker-alt text-action mr-1"></i> Plombier Électricien sur Marseille</span>
@@ -189,7 +189,7 @@
                     </div>
                     
                     <div class="mt-6 flex items-center justify-center lg:justify-start gap-4 text-sm text-slate-300">
-                        <div class="flex text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                        <div class="flex text-yellow-400 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-300"></i></div>
                         <span>4/5 sur PagesJaunes & Google</span>
                     </div>
                 </div>
@@ -203,11 +203,11 @@
                             <input type="text" name="nom" required aria-label="Votre nom" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Votre nom complet">
                             <input type="tel" name="telephone" required aria-label="Votre téléphone" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Votre numéro de téléphone">
 <select name="type" required aria-label="Nature du problème" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all">
-                                <option value="" disabled selected>Nature du problème...</option>
-                                <option>Urgence Électricité</option>
-                                <option>Urgence Plomberie</option>
-                                <option>Projet d'installation</option>
-                            </select>
+                                <option value="" disabled selected>Nature du problème...</option>
+                                <option>Urgence Électricité</option>
+                                <option>Urgence Plomberie</option>
+                                <option>Projet d'installation</option>
+                            </select>
 
                             <div class="flex items-start gap-2 mt-4 mb-2">
                                 <input type="checkbox" id="consent_hero" name="consentement" required class="mt-0.5 w-4 h-4 text-brand bg-white border-slate-300 rounded focus:ring-brand cursor-pointer shrink-0">
@@ -219,8 +219,8 @@
 <button type="submit" class="w-full bg-brand text-white font-bold rounded-lg hover:bg-brand-dark transition-colors py-3 text-center text-lg">
     Être rappelé gratuitement
 </button>
-                            <p class="text-center text-xs text-slate-400 mt-2"><i class="fas fa-lock mr-1"></i> Vos données sont sécurisées</p>
-                        </form>
+                            <p class="text-center text-xs text-slate-400 mt-2"><i class="fas fa-lock mr-1"></i> Vos données sont sécurisées</p>
+                        </form>
                     </div>
                 </div>
 
@@ -375,7 +375,7 @@
                 <p class="text-slate-600 mb-6">Avec une excellente moyenne et de nombreuses recommandations, la satisfaction de nos clients est notre meilleure publicité.</p>
                 <div class="inline-flex flex-col items-center lg:items-start bg-slate-50 p-6 rounded-2xl border border-slate-100 w-full sm:w-auto hover:shadow-md transition-shadow">
                     <div class="flex text-yellow-400 text-2xl mb-2">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star text-slate-300"></i>
                     </div>
                     <span class="font-bold text-slate-900 text-lg">Note globale (PagesJaunes & Maps) : 4/5</span>
                     <span class="text-sm text-slate-500">Avis certifiés Google</span>
@@ -456,7 +456,7 @@
 
                     <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl flex gap-4">
                         <i class="fas fa-exclamation-triangle text-amber-500 text-2xl"></i>
-                        <p class="text-sm text-amber-800"><strong>Urgence ?</strong> Ne remplissez pas le formulaire, appelez-nous directement pour une prise en charge immédiate.</p>
+                        <p id="urgency-warning" class="text-sm text-amber-800"><strong>Urgence ?</strong> Ne remplissez pas le formulaire, appelez-nous directement pour une prise en charge immédiate.</p>
                     </div>
                 </div>
 
@@ -485,9 +485,9 @@
                             </select>
                         </div>
                     <div>
-                            <label for="message" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Détails de la demande</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Expliquez brièvement votre problème ou projet..."></textarea>
-                        </div>
+                            <label for="message" class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Détails de la demande</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-white focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition-all" placeholder="Expliquez brièvement votre problème ou projet..."></textarea>
+                        </div>
 
                         <div class="flex items-start gap-3">
                             <input type="checkbox" id="consent_contact" name="consentement" required class="mt-1 w-4 h-4 text-brand bg-white border-slate-300 rounded focus:ring-brand cursor-pointer shrink-0">
@@ -499,7 +499,7 @@
 <button type="submit" class="w-full py-4 bg-brand text-white font-bold rounded-xl hover:bg-brand-dark transition-colors text-center text-lg group">
     Envoyer la demande <i class="fas fa-paper-plane inline-block ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
 </button>
-                    </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -562,7 +562,7 @@
                 <h3 class="text-xl font-bold text-slate-900 mb-4 border-b pb-2">Mentions Légales</h3>
                 <p><strong>Éditeur :</strong> Haim Lumière, domicilié au 1 traverse Antignane, 13008 Marseille.</p>
                 <p><strong>Activité :</strong> Travaux d'installation électrique, dépannage plomberie et interventions rapides.</p>
-                <p><strong>Hébergement :</strong> GitHub Pages / Ou prestataire de votre choix.</p>
+                <p><strong>Hébergement :</strong> GitHub Pages</p>
             </div>
 
             <div id="modal-confid" class="hidden space-y-4 text-slate-600 text-sm">
@@ -576,6 +576,29 @@
 <script>
     // --- Mise à jour automatique de l'année ---
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // --- Gestion de la Disponibilité (Fermé le samedi) ---
+    function checkAvailability() {
+        const now = new Date();
+        const day = now.getDay(); // 0: Dimanche, 6: Samedi
+        const statusBadge = document.getElementById('status-badge');
+        
+        if (day === 6) { 
+            // C'est samedi : Mode Fermé
+            statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-slate-400 mr-2"></span> Fermé aujourd\'hui (Samedi)';
+            statusBadge.className = 'flex items-center bg-slate-100/20 text-slate-300 px-2 py-0.5 rounded text-xs font-bold';
+            
+            const formWarning = document.getElementById('urgency-warning');
+            if (formWarning) {
+                formWarning.innerHTML = '<strong>Attention :</strong> Nous sommes fermés le samedi. Laissez-nous un message, nous vous contacterons dès demain pour votre urgence.';
+            }
+        } else {
+            // Ouvert (Les autres jours)
+            statusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-success mr-2"></span> Disponible 24h/24';
+            statusBadge.className = 'flex items-center bg-success/20 text-success px-2 py-0.5 rounded text-xs font-bold animate-pulse';
+        }
+    }
+    checkAvailability();
 
     // --- Gestion du Menu Mobile ---
     const btn = document.getElementById('mobile-menu-btn');
